@@ -1,0 +1,1486 @@
+{
+  "compute.instances.insert": [
+    "compute.instances.create",
+    "compute.instances.setMetadata",
+    "compute.zones.get"
+  ],
+  "storage.buckets.insert": [
+    "storage.buckets.create"
+  ],
+  "resourcemanager.liens.insert": [
+    "resourcemanager.liens.create"
+  ],
+  "privateca.certificateauthorities.insert": [
+    "privateca.certificateauthorities.create"
+  ],
+  "privateca.certificatetemplates.insert": [
+    "privateca.certificatetemplates.create"
+  ],
+  "privateca.capools.insert": [
+    "privateca.capools.create"
+  ],
+  "privateca.certificates.insert": [
+    "privateca.certificates.create"
+  ],
+  "cloudfunctions.functions.insert": [
+    "cloudfunctions.functions.create"
+  ],
+  "orgpolicy.policies.insert": [
+    "orgpolicy.policies.create"
+  ],
+  "orgpolicy.customconstraints.insert": [
+    "orgpolicy.customconstraints.create"
+  ],
+  "workstations.workstationconfigs.insert": [
+    "workstations.workstationconfigs.create"
+  ],
+  "workstations.workstations.insert": [
+    "workstations.workstations.create"
+  ],
+  "workstations.workstationclusters.insert": [
+    "workstations.workstationclusters.create"
+  ],
+  "datastream.privateconnections.insert": [
+    "datastream.privateconnections.create"
+  ],
+  "datastream.streams.insert": [
+    "datastream.streams.create"
+  ],
+  "datastream.connectionprofiles.insert": [
+    "datastream.connectionprofiles.create"
+  ],
+  "binaryauthorization.policy.insert": [
+    "binaryauthorization.policy.create"
+  ],
+  "beyondcorp.appgateways.insert": [
+    "beyondcorp.appgateways.create"
+  ],
+  "beyondcorp.appconnections.insert": [
+    "beyondcorp.appconnections.create"
+  ],
+  "beyondcorp.appconnectors.insert": [
+    "beyondcorp.appconnectors.create"
+  ],
+  "apigee.deployments.insert": [
+    "apigee.deployments.create"
+  ],
+  "apigee.securitymonitoringconditions.insert": [
+    "apigee.securitymonitoringconditions.create"
+  ],
+  "apigee.attachments.insert": [
+    "apigee.attachments.create"
+  ],
+  "apigee.organizations.insert": [
+    "apigee.organizations.create"
+  ],
+  "apigee.envgroups.insert": [
+    "apigee.envgroups.create"
+  ],
+  "apigee.targetservers.insert": [
+    "apigee.targetservers.create"
+  ],
+  "apigee.securityprofilesv2.insert": [
+    "apigee.securityprofilesv2.create"
+  ],
+  "apigee.references.insert": [
+    "apigee.references.create"
+  ],
+  "apigee.entries.insert": [
+    "apigee.entries.create"
+  ],
+  "apigee.securityfeedback.insert": [
+    "apigee.securityfeedback.create"
+  ],
+  "apigee.instances.insert": [
+    "apigee.instances.create"
+  ],
+  "apigee.securityactions.insert": [
+    "apigee.securityactions.create"
+  ],
+  "apigee.nataddresses.insert": [
+    "apigee.nataddresses.create"
+  ],
+  "apigee.endpointattachments.insert": [
+    "apigee.endpointattachments.create"
+  ],
+  "apigee.keyvaluemaps.insert": [
+    "apigee.keyvaluemaps.create"
+  ],
+  "apigee.keystores.insert": [
+    "apigee.keystores.create"
+  ],
+  "apigee.environments.insert": [
+    "apigee.environments.create"
+  ],
+  "apigee.dnszones.insert": [
+    "apigee.dnszones.create"
+  ],
+  "developerconnect.gitrepositorylinks.insert": [
+    "developerconnect.gitrepositorylinks.create"
+  ],
+  "kms.autokeyconfig.insert": [
+    "kms.autokeyconfig.create"
+  ],
+  "kms.kajpolicyconfig.insert": [
+    "kms.kajpolicyconfig.create"
+  ],
+  "kms.keyrings.insert": [
+    "kms.keyrings.create"
+  ],
+  "kms.ekmconnections.insert": [
+    "kms.ekmconnections.create"
+  ],
+  "kms.cryptokeys.insert": [
+    "kms.cryptokeys.create"
+  ],
+  "kms.cryptokeyversions.insert": [
+    "kms.cryptokeyversions.create"
+  ],
+  "kms.keyhandles.insert": [
+    "kms.keyhandles.create"
+  ],
+  "runtimeconfig.configs.insert": [
+    "runtimeconfig.configs.create"
+  ],
+  "privilegedaccessmanager.settings.insert": [
+    "privilegedaccessmanager.settings.create"
+  ],
+  "privilegedaccessmanager.entitlements.insert": [
+    "privilegedaccessmanager.entitlements.create"
+  ],
+  "publicca.externalaccountkeys.insert": [
+    "publicca.externalaccountkeys.create"
+  ],
+  "networkservices.servicebindings.insert": [
+    "networkservices.servicebindings.create"
+  ],
+  "networkservices.edgecacheservices.insert": [
+    "networkservices.edgecacheservices.create"
+  ],
+  "networkservices.httproutes.insert": [
+    "networkservices.httproutes.create"
+  ],
+  "networkservices.lbtrafficextensions.insert": [
+    "networkservices.lbtrafficextensions.create"
+  ],
+  "networkservices.tlsroutes.insert": [
+    "networkservices.tlsroutes.create"
+  ],
+  "networkservices.lbrouteextensions.insert": [
+    "networkservices.lbrouteextensions.create"
+  ],
+  "networkservices.lbedgeextensions.insert": [
+    "networkservices.lbedgeextensions.create"
+  ],
+  "networkservices.edgecacheorigins.insert": [
+    "networkservices.edgecacheorigins.create"
+  ],
+  "networkservices.servicelbpolicies.insert": [
+    "networkservices.servicelbpolicies.create"
+  ],
+  "networkservices.grpcroutes.insert": [
+    "networkservices.grpcroutes.create"
+  ],
+  "networkservices.gateways.insert": [
+    "networkservices.gateways.create"
+  ],
+  "networkservices.endpointpolicies.insert": [
+    "networkservices.endpointpolicies.create"
+  ],
+  "networkservices.edgecachekeysets.insert": [
+    "networkservices.edgecachekeysets.create"
+  ],
+  "networkservices.authzextensions.insert": [
+    "networkservices.authzextensions.create"
+  ],
+  "networkservices.tcproutes.insert": [
+    "networkservices.tcproutes.create"
+  ],
+  "networkservices.agentgateways.insert": [
+    "networkservices.agentgateways.create"
+  ],
+  "networkservices.wasmplugins.insert": [
+    "networkservices.wasmplugins.create"
+  ],
+  "netapp.backups.insert": [
+    "netapp.backups.create"
+  ],
+  "netapp.quotarules.insert": [
+    "netapp.quotarules.create"
+  ],
+  "netapp.hostgroups.insert": [
+    "netapp.hostgroups.create"
+  ],
+  "netapp.backupvaults.insert": [
+    "netapp.backupvaults.create"
+  ],
+  "netapp.volumes.insert": [
+    "netapp.volumes.create"
+  ],
+  "netapp.snapshots.insert": [
+    "netapp.snapshots.create"
+  ],
+  "netapp.activedirectories.insert": [
+    "netapp.activedirectories.create"
+  ],
+  "netapp.kmsconfigs.insert": [
+    "netapp.kmsconfigs.create"
+  ],
+  "netapp.backuppolicies.insert": [
+    "netapp.backuppolicies.create"
+  ],
+  "netapp.storagepools.insert": [
+    "netapp.storagepools.create"
+  ],
+  "netapp.replications.insert": [
+    "netapp.replications.create"
+  ],
+  "discoveryengine.datastores.insert": [
+    "discoveryengine.datastores.create"
+  ],
+  "discoveryengine.servingconfigs.insert": [
+    "discoveryengine.servingconfigs.create"
+  ],
+  "discoveryengine.assistants.insert": [
+    "discoveryengine.assistants.create"
+  ],
+  "discoveryengine.dataconnector.insert": [
+    "discoveryengine.dataconnector.create"
+  ],
+  "discoveryengine.userstores.insert": [
+    "discoveryengine.userstores.create"
+  ],
+  "discoveryengine.licenseconfigs.insert": [
+    "discoveryengine.licenseconfigs.create"
+  ],
+  "discoveryengine.aclconfig.insert": [
+    "discoveryengine.aclconfig.create"
+  ],
+  "discoveryengine.sitemaps:fetch.insert": [
+    "discoveryengine.sitemaps:fetch.create"
+  ],
+  "discoveryengine.schemas.insert": [
+    "discoveryengine.schemas.create"
+  ],
+  "discoveryengine.widgetconfigs.insert": [
+    "discoveryengine.widgetconfigs.create"
+  ],
+  "discoveryengine.targetsites.insert": [
+    "discoveryengine.targetsites.create"
+  ],
+  "discoveryengine.cmekconfigs.insert": [
+    "discoveryengine.cmekconfigs.create"
+  ],
+  "discoveryengine.controls.insert": [
+    "discoveryengine.controls.create"
+  ],
+  "gkeonprem.baremetalclusters.insert": [
+    "gkeonprem.baremetalclusters.create"
+  ],
+  "gkeonprem.vmwarenodepools.insert": [
+    "gkeonprem.vmwarenodepools.create"
+  ],
+  "gkeonprem.baremetaladminclusters.insert": [
+    "gkeonprem.baremetaladminclusters.create"
+  ],
+  "gkeonprem.baremetalnodepools.insert": [
+    "gkeonprem.baremetalnodepools.create"
+  ],
+  "servicemanagement.services.insert": [
+    "servicemanagement.services.create"
+  ],
+  "securitycenterv2.muteconfigs.insert": [
+    "securitycenterv2.muteconfigs.create"
+  ],
+  "securitycenterv2.bigqueryexports.insert": [
+    "securitycenterv2.bigqueryexports.create"
+  ],
+  "securitycenterv2.sources.insert": [
+    "securitycenterv2.sources.create"
+  ],
+  "securitycenterv2.notificationconfigs.insert": [
+    "securitycenterv2.notificationconfigs.create"
+  ],
+  "vpcaccess.connectors.insert": [
+    "vpcaccess.connectors.create"
+  ],
+  "looker.instances.insert": [
+    "looker.instances.create"
+  ],
+  "bigqueryanalyticshub.dataexchanges.insert": [
+    "bigqueryanalyticshub.dataexchanges.create"
+  ],
+  "bigqueryanalyticshub.subscriptions.insert": [
+    "bigqueryanalyticshub.subscriptions.create"
+  ],
+  "bigqueryanalyticshub.listings.insert": [
+    "bigqueryanalyticshub.listings.create"
+  ],
+  "documentaiwarehouse.documentschemas.insert": [
+    "documentaiwarehouse.documentschemas.create"
+  ],
+  "iam2.denypolicies.insert": [
+    "iam2.denypolicies.create"
+  ],
+  "iam2.accessboundarypolicies.insert": [
+    "iam2.accessboundarypolicies.create"
+  ],
+  "gkehub.memberships.insert": [
+    "gkehub.memberships.create"
+  ],
+  "securityposture.postures.insert": [
+    "securityposture.postures.create"
+  ],
+  "networkconnectivityv1.serviceconnectionpolicies.insert": [
+    "networkconnectivityv1.serviceconnectionpolicies.create"
+  ],
+  "networkconnectivityv1.internalranges.insert": [
+    "networkconnectivityv1.internalranges.create"
+  ],
+  "networkmanagement.vpcflowlogsconfigs.insert": [
+    "networkmanagement.vpcflowlogsconfigs.create"
+  ],
+  "securitycenter.custommodules.insert": [
+    "securitycenter.custommodules.create"
+  ],
+  "securitycenter.sources.insert": [
+    "securitycenter.sources.create"
+  ],
+  "securitycenter.bigqueryexports.insert": [
+    "securitycenter.bigqueryexports.create"
+  ],
+  "securitycenter.notificationconfigs.insert": [
+    "securitycenter.notificationconfigs.create"
+  ],
+  "securitycenter.muteconfigs.insert": [
+    "securitycenter.muteconfigs.create"
+  ],
+  "apphub.services.insert": [
+    "apphub.services.create"
+  ],
+  "apphub.workloads.insert": [
+    "apphub.workloads.create"
+  ],
+  "apphub.serviceprojectattachments.insert": [
+    "apphub.serviceprojectattachments.create"
+  ],
+  "apphub.applications.insert": [
+    "apphub.applications.create"
+  ],
+  "dialogflow..insert": [
+    "dialogflow..create"
+  ],
+  "dialogflow.generators.insert": [
+    "dialogflow.generators.create"
+  ],
+  "dialogflow.versions.insert": [
+    "dialogflow.versions.create"
+  ],
+  "dialogflow.agent.insert": [
+    "dialogflow.agent.create"
+  ],
+  "dialogflow.encryptionspec.insert": [
+    "dialogflow.encryptionspec.create"
+  ],
+  "dialogflow.conversationprofiles.insert": [
+    "dialogflow.conversationprofiles.create"
+  ],
+  "storageinsights.datasetconfigs.insert": [
+    "storageinsights.datasetconfigs.create"
+  ],
+  "storageinsights.reportconfigs.insert": [
+    "storageinsights.reportconfigs.create"
+  ],
+  "documentai.processors.insert": [
+    "documentai.processors.create"
+  ],
+  "artifactregistry.vpcscconfig.insert": [
+    "artifactregistry.vpcscconfig.create"
+  ],
+  "artifactregistry.repositories.insert": [
+    "artifactregistry.repositories.create"
+  ],
+  "iam3.policybindings.insert": [
+    "iam3.policybindings.create"
+  ],
+  "iam3.principalaccessboundarypolicies.insert": [
+    "iam3.principalaccessboundarypolicies.create"
+  ],
+  "firestore.usercreds.insert": [
+    "firestore.usercreds.create"
+  ],
+  "firestore.fields.insert": [
+    "firestore.fields.create"
+  ],
+  "firestore.databases.insert": [
+    "firestore.databases.create"
+  ],
+  "firestore.backupschedules.insert": [
+    "firestore.backupschedules.create"
+  ],
+  "firestore.indexes.insert": [
+    "firestore.indexes.create"
+  ],
+  "redis.instances.insert": [
+    "redis.instances.create"
+  ],
+  "redis.clusters.insert": [
+    "redis.clusters.create"
+  ],
+  "mlengine.models.insert": [
+    "mlengine.models.create"
+  ],
+  "dataplex.dataproducts.insert": [
+    "dataplex.dataproducts.create"
+  ],
+  "dataplex.datascans.insert": [
+    "dataplex.datascans.create"
+  ],
+  "dataplex.dataassets.insert": [
+    "dataplex.dataassets.create"
+  ],
+  "accessapproval.accessapprovalsettings.insert": [
+    "accessapproval.accessapprovalsettings.create"
+  ],
+  "activedirectory.domains.insert": [
+    "activedirectory.domains.create"
+  ],
+  "activedirectory.peerings.insert": [
+    "activedirectory.peerings.create"
+  ],
+  "clouddomains.registrations.insert": [
+    "clouddomains.registrations.create"
+  ],
+  "parallelstore.instances.insert": [
+    "parallelstore.instances.create"
+  ],
+  "cloudfunctions2.functions.insert": [
+    "cloudfunctions2.functions.create"
+  ],
+  "cloudidentity.policies.insert": [
+    "cloudidentity.policies.create"
+  ],
+  "cloudidentity.memberships.insert": [
+    "cloudidentity.memberships.create"
+  ],
+  "composer.userworkloadsconfigmaps.insert": [
+    "composer.userworkloadsconfigmaps.create"
+  ],
+  "appengine.versions.insert": [
+    "appengine.versions.create"
+  ],
+  "appengine.domainmappings.insert": [
+    "appengine.domainmappings.create"
+  ],
+  "appengine.services.insert": [
+    "appengine.services.create"
+  ],
+  "appengine.ingressrules.insert": [
+    "appengine.ingressrules.create"
+  ],
+  "filestore.backups.insert": [
+    "filestore.backups.create"
+  ],
+  "filestore.snapshots.insert": [
+    "filestore.snapshots.create"
+  ],
+  "filestore.instances.insert": [
+    "filestore.instances.create"
+  ],
+  "bigqueryconnection.connections.insert": [
+    "bigqueryconnection.connections.create"
+  ],
+  "securitycentermanagement.eventthreatdetectioncustommodules.insert": [
+    "securitycentermanagement.eventthreatdetectioncustommodules.create"
+  ],
+  "securitycentermanagement.securityhealthanalyticscustommodules.insert": [
+    "securitycentermanagement.securityhealthanalyticscustommodules.create"
+  ],
+  "firebasedatabase..insert": [
+    "firebasedatabase..create"
+  ],
+  "deploymentmanager.deployments.insert": [
+    "deploymentmanager.deployments.create"
+  ],
+  "memorystore.instances.insert": [
+    "memorystore.instances.create"
+  ],
+  "datafusion.instances.insert": [
+    "datafusion.instances.create"
+  ],
+  "storagetransfer.agentpools.insert": [
+    "storagetransfer.agentpools.create"
+  ],
+  "managedkafka.acls.insert": [
+    "managedkafka.acls.create"
+  ],
+  "managedkafka.topics.insert": [
+    "managedkafka.topics.create"
+  ],
+  "managedkafka.clusters.insert": [
+    "managedkafka.clusters.create"
+  ],
+  "bigqueryreservation.capacitycommitments.insert": [
+    "bigqueryreservation.capacitycommitments.create"
+  ],
+  "bigqueryreservation.assignments.insert": [
+    "bigqueryreservation.assignments.create"
+  ],
+  "bigqueryreservation.bireservation.insert": [
+    "bigqueryreservation.bireservation.create"
+  ],
+  "backupdr.managementservers.insert": [
+    "backupdr.managementservers.create"
+  ],
+  "backupdr.backupvaults.insert": [
+    "backupdr.backupvaults.create"
+  ],
+  "backupdr.serviceconfig.insert": [
+    "backupdr.serviceconfig.create"
+  ],
+  "cloudbuild.triggers.insert": [
+    "cloudbuild.triggers.create"
+  ],
+  "workflows.workflows.insert": [
+    "workflows.workflows.create"
+  ],
+  "secretmanager.secrets.insert": [
+    "secretmanager.secrets.create"
+  ],
+  "transcoder.jobtemplates.insert": [
+    "transcoder.jobtemplates.create"
+  ],
+  "accesscontextmanager.accesslevels:replaceall.insert": [
+    "accesscontextmanager.accesslevels:replaceall.create"
+  ],
+  "accesscontextmanager.serviceperimeters:replaceall.insert": [
+    "accesscontextmanager.serviceperimeters:replaceall.create"
+  ],
+  "accesscontextmanager.gcpuseraccessbindings.insert": [
+    "accesscontextmanager.gcpuseraccessbindings.create"
+  ],
+  "accesscontextmanager.accesspolicies.insert": [
+    "accesscontextmanager.accesspolicies.create"
+  ],
+  "parametermanagerregional.parameters.insert": [
+    "parametermanagerregional.parameters.create"
+  ],
+  "parametermanagerregional.versions.insert": [
+    "parametermanagerregional.versions.create"
+  ],
+  "bigquery.routines.insert": [
+    "bigquery.routines.create"
+  ],
+  "bigquery.jobs.insert": [
+    "bigquery.jobs.create"
+  ],
+  "bigquery.datasets.insert": [
+    "bigquery.datasets.create"
+  ],
+  "firebaseappcheck.appattestconfig.insert": [
+    "firebaseappcheck.appattestconfig.create"
+  ],
+  "firebaseappcheck.debugtokens.insert": [
+    "firebaseappcheck.debugtokens.create"
+  ],
+  "firebaseappcheck.recaptchav3config.insert": [
+    "firebaseappcheck.recaptchav3config.create"
+  ],
+  "firebaseappcheck..insert": [
+    "firebaseappcheck..create"
+  ],
+  "firebaseappcheck.recaptchaenterpriseconfig.insert": [
+    "firebaseappcheck.recaptchaenterpriseconfig.create"
+  ],
+  "firebaseappcheck.playintegrityconfig.insert": [
+    "firebaseappcheck.playintegrityconfig.create"
+  ],
+  "firebaseappcheck.devicecheckconfig.insert": [
+    "firebaseappcheck.devicecheckconfig.create"
+  ],
+  "firebasehosting.sites.insert": [
+    "firebasehosting.sites.create"
+  ],
+  "firebasehosting.versions.insert": [
+    "firebasehosting.versions.create"
+  ],
+  "firebasehosting.channels.insert": [
+    "firebasehosting.channels.create"
+  ],
+  "firebasehosting.releases.insert": [
+    "firebasehosting.releases.create"
+  ],
+  "firebasehosting.customdomains.insert": [
+    "firebasehosting.customdomains.create"
+  ],
+  "biglakeiceberg.namespaces.insert": [
+    "biglakeiceberg.namespaces.create"
+  ],
+  "biglakeiceberg.catalogs.insert": [
+    "biglakeiceberg.catalogs.create"
+  ],
+  "biglakeiceberg.tables.insert": [
+    "biglakeiceberg.tables.create"
+  ],
+  "observability.settings.insert": [
+    "observability.settings.create"
+  ],
+  "sourcerepo.repos.insert": [
+    "sourcerepo.repos.create"
+  ],
+  "storage.managedfolders.insert": [
+    "storage.managedfolders.create"
+  ],
+  "storage.folders.insert": [
+    "storage.folders.create"
+  ],
+  "storage.defaultobjectacl.insert": [
+    "storage.defaultobjectacl.create"
+  ],
+  "storage.anywherecaches.insert": [
+    "storage.anywherecaches.create"
+  ],
+  "storage.hmackeys.insert": [
+    "storage.hmackeys.create"
+  ],
+  "storage.acl.insert": [
+    "storage.acl.create"
+  ],
+  "tags.tagkeys.insert": [
+    "tags.tagkeys.create"
+  ],
+  "tags.tagbindings.insert": [
+    "tags.tagbindings.create"
+  ],
+  "tags.tagvalues.insert": [
+    "tags.tagvalues.create"
+  ],
+  "gkebackup.restorechannels.insert": [
+    "gkebackup.restorechannels.create"
+  ],
+  "gkebackup.backupchannels.insert": [
+    "gkebackup.backupchannels.create"
+  ],
+  "gkebackup.restoreplans.insert": [
+    "gkebackup.restoreplans.create"
+  ],
+  "gkebackup.backupplans.insert": [
+    "gkebackup.backupplans.create"
+  ],
+  "cloudrun.services.insert": [
+    "cloudrun.services.create"
+  ],
+  "integrations.authconfigs.insert": [
+    "integrations.authconfigs.create"
+  ],
+  "integrations.clients.insert": [
+    "integrations.clients.create"
+  ],
+  "iap.brands.insert": [
+    "iap.brands.create"
+  ],
+  "iap.destgroups.insert": [
+    "iap.destgroups.create"
+  ],
+  "iap.iap_web.insert": [
+    "iap.iap_web.create"
+  ],
+  "iap.identityawareproxyclients.insert": [
+    "iap.identityawareproxyclients.create"
+  ],
+  "iap.iap_tunnel.insert": [
+    "iap.iap_tunnel.create"
+  ],
+  "iap.compute.insert": [
+    "iap.compute.create"
+  ],
+  "firebase.androidapps.insert": [
+    "firebase.androidapps.create"
+  ],
+  "firebase.webapps.insert": [
+    "firebase.webapps.create"
+  ],
+  "firebase.iosapps.insert": [
+    "firebase.iosapps.create"
+  ],
+  "vertexai.featureonlinestores.insert": [
+    "vertexai.featureonlinestores.create"
+  ],
+  "vertexai.metadatastores.insert": [
+    "vertexai.metadatastores.create"
+  ],
+  "vertexai.featurestores.insert": [
+    "vertexai.featurestores.create"
+  ],
+  "vertexai.tensorboards.insert": [
+    "vertexai.tensorboards.create"
+  ],
+  "vertexai.endpoints.insert": [
+    "vertexai.endpoints.create"
+  ],
+  "vertexai.ragengineconfig.insert": [
+    "vertexai.ragengineconfig.create"
+  ],
+  "vertexai.features.insert": [
+    "vertexai.features.create"
+  ],
+  "vertexai.cacheconfig.insert": [
+    "vertexai.cacheconfig.create"
+  ],
+  "vertexai.featuregroups.insert": [
+    "vertexai.featuregroups.create"
+  ],
+  "vertexai.indexendpoints.insert": [
+    "vertexai.indexendpoints.create"
+  ],
+  "vertexai.featureviews.insert": [
+    "vertexai.featureviews.create"
+  ],
+  "vertexai.reasoningengines.insert": [
+    "vertexai.reasoningengines.create"
+  ],
+  "vertexai.datasets.insert": [
+    "vertexai.datasets.create"
+  ],
+  "vertexai.entitytypes.insert": [
+    "vertexai.entitytypes.create"
+  ],
+  "vertexai.deploymentresourcepools.insert": [
+    "vertexai.deploymentresourcepools.create"
+  ],
+  "vertexai.indexes.insert": [
+    "vertexai.indexes.create"
+  ],
+  "edgecontainer.nodepools.insert": [
+    "edgecontainer.nodepools.create"
+  ],
+  "edgecontainer.clusters.insert": [
+    "edgecontainer.clusters.create"
+  ],
+  "edgecontainer.vpnconnections.insert": [
+    "edgecontainer.vpnconnections.create"
+  ],
+  "cloudasset.feeds.insert": [
+    "cloudasset.feeds.create"
+  ],
+  "compute.targethttpproxies.insert": [
+    "compute.targethttpproxies.create"
+  ],
+  "compute.sslcertificates.insert": [
+    "compute.sslcertificates.create"
+  ],
+  "compute.interconnectattachmentgroups.insert": [
+    "compute.interconnectattachmentgroups.create"
+  ],
+  "compute.instancesettings.insert": [
+    "compute.instancesettings.create"
+  ],
+  "compute.forwardingrules.insert": [
+    "compute.forwardingrules.create"
+  ],
+  "compute.serviceattachments.insert": [
+    "compute.serviceattachments.create"
+  ],
+  "compute.instantsnapshots.insert": [
+    "compute.instantsnapshots.create"
+  ],
+  "compute.storagepooltypes.insert": [
+    "compute.storagepooltypes.create"
+  ],
+  "compute.instancetemplates.insert": [
+    "compute.instancetemplates.create"
+  ],
+  "compute.firewalls.insert": [
+    "compute.firewalls.create"
+  ],
+  "compute.sslpolicies.insert": [
+    "compute.sslpolicies.create"
+  ],
+  "compute.zones.insert": [
+    "compute.zones.create"
+  ],
+  "compute.backendbuckets.insert": [
+    "compute.backendbuckets.create"
+  ],
+  "compute.compositehealthchecks.insert": [
+    "compute.compositehealthchecks.create"
+  ],
+  "compute.interconnectattachments.insert": [
+    "compute.interconnectattachments.create"
+  ],
+  "compute.publicdelegatedprefixes.insert": [
+    "compute.publicdelegatedprefixes.create"
+  ],
+  "compute.disktypes.insert": [
+    "compute.disktypes.create"
+  ],
+  "compute.disks.insert": [
+    "compute.disks.create"
+  ],
+  "compute.firewallpolicies.insert": [
+    "compute.firewallpolicies.create"
+  ],
+  "compute.addresses.insert": [
+    "compute.addresses.create"
+  ],
+  "compute.rolloutplans.insert": [
+    "compute.rolloutplans.create"
+  ],
+  "compute.vpngateways.insert": [
+    "compute.vpngateways.create"
+  ],
+  "compute.networkedgesecurityservices.insert": [
+    "compute.networkedgesecurityservices.create"
+  ],
+  "compute.healthchecks.insert": [
+    "compute.healthchecks.create"
+  ],
+  "compute.packetmirrorings.insert": [
+    "compute.packetmirrorings.create"
+  ],
+  "compute.snapshots.insert": [
+    "compute.snapshots.create"
+  ],
+  "compute.autoscalers.insert": [
+    "compute.autoscalers.create"
+  ],
+  "compute.resizerequests.insert": [
+    "compute.resizerequests.create"
+  ],
+  "compute.targetinstances.insert": [
+    "compute.targetinstances.create"
+  ],
+  "compute.targetvpngateways.insert": [
+    "compute.targetvpngateways.create"
+  ],
+  "compute.wiregroups.insert": [
+    "compute.wiregroups.create"
+  ],
+  "compute.snapshotsettings.insert": [
+    "compute.snapshotsettings.create"
+  ],
+  "compute.instancegroupmanagers.insert": [
+    "compute.instancegroupmanagers.create"
+  ],
+  "compute.urlmaps.insert": [
+    "compute.urlmaps.create"
+  ],
+  "compute.routes.insert": [
+    "compute.routes.create"
+  ],
+  "compute.targetgrpcproxies.insert": [
+    "compute.targetgrpcproxies.create"
+  ],
+  "compute.machinetypes.insert": [
+    "compute.machinetypes.create"
+  ],
+  "compute.backendservices.insert": [
+    "compute.backendservices.create"
+  ],
+  "compute.healthaggregationpolicies.insert": [
+    "compute.healthaggregationpolicies.create"
+  ],
+  "compute.licenses.insert": [
+    "compute.licenses.create"
+  ],
+  "compute.networkattachments.insert": [
+    "compute.networkattachments.create"
+  ],
+  "compute.networks.insert": [
+    "compute.networks.create"
+  ],
+  "compute.targetsslproxies.insert": [
+    "compute.targetsslproxies.create"
+  ],
+  "compute.networkendpointgroups.insert": [
+    "compute.networkendpointgroups.create"
+  ],
+  "compute.commitments.insert": [
+    "compute.commitments.create"
+  ],
+  "compute.futurereservations.insert": [
+    "compute.futurereservations.create"
+  ],
+  "compute.httphealthchecks.insert": [
+    "compute.httphealthchecks.create"
+  ],
+  "compute.instancegroups.insert": [
+    "compute.instancegroups.create"
+  ],
+  "compute.images.insert": [
+    "compute.images.create"
+  ],
+  "compute.securitypolicies.insert": [
+    "compute.securitypolicies.create"
+  ],
+  "compute.interconnectgroups.insert": [
+    "compute.interconnectgroups.create"
+  ],
+  "compute.externalvpngateways.insert": [
+    "compute.externalvpngateways.create"
+  ],
+  "compute.healthsources.insert": [
+    "compute.healthsources.create"
+  ],
+  "compute.routers.insert": [
+    "compute.routers.create"
+  ],
+  "compute.targethttpsproxies.insert": [
+    "compute.targethttpsproxies.create"
+  ],
+  "compute.crosssitenetworks.insert": [
+    "compute.crosssitenetworks.create"
+  ],
+  "compute.publicadvertisedprefixes.insert": [
+    "compute.publicadvertisedprefixes.create"
+  ],
+  "compute.reservations.insert": [
+    "compute.reservations.create"
+  ],
+  "compute.previewfeatures.insert": [
+    "compute.previewfeatures.create"
+  ],
+  "compute.regions.insert": [
+    "compute.regions.create"
+  ],
+  "compute.nodetemplates.insert": [
+    "compute.nodetemplates.create"
+  ],
+  "compute.httpshealthchecks.insert": [
+    "compute.httpshealthchecks.create"
+  ],
+  "workbench.instances.insert": [
+    "workbench.instances.create"
+  ],
+  "containerattached.attachedclusters.insert": [
+    "containerattached.attachedclusters.create"
+  ],
+  "networkconnectivity.gatewayadvertisedroutes.insert": [
+    "networkconnectivity.gatewayadvertisedroutes.create"
+  ],
+  "networkconnectivity.regionalendpoints.insert": [
+    "networkconnectivity.regionalendpoints.create"
+  ],
+  "networkconnectivity.multiclouddatatransferconfigs.insert": [
+    "networkconnectivity.multiclouddatatransferconfigs.create"
+  ],
+  "networkconnectivity.destinations.insert": [
+    "networkconnectivity.destinations.create"
+  ],
+  "networkconnectivity.transports.insert": [
+    "networkconnectivity.transports.create"
+  ],
+  "networkconnectivity.spokes.insert": [
+    "networkconnectivity.spokes.create"
+  ],
+  "networkconnectivity.hubs.insert": [
+    "networkconnectivity.hubs.create"
+  ],
+  "networkconnectivity.policybasedroutes.insert": [
+    "networkconnectivity.policybasedroutes.create"
+  ],
+  "billingbudget.budgets.insert": [
+    "billingbudget.budgets.create"
+  ],
+  "siteverification.webresource.insert": [
+    "siteverification.webresource.create"
+  ],
+  "identityplatform.defaultsupportedidpconfigs.insert": [
+    "identityplatform.defaultsupportedidpconfigs.create"
+  ],
+  "identityplatform.tenants.insert": [
+    "identityplatform.tenants.create"
+  ],
+  "identityplatform.oauthidpconfigs.insert": [
+    "identityplatform.oauthidpconfigs.create"
+  ],
+  "identityplatform.config.insert": [
+    "identityplatform.config.create"
+  ],
+  "identityplatform.inboundsamlconfigs.insert": [
+    "identityplatform.inboundsamlconfigs.create"
+  ],
+  "edgenetwork.interconnectattachments.insert": [
+    "edgenetwork.interconnectattachments.create"
+  ],
+  "edgenetwork.subnets.insert": [
+    "edgenetwork.subnets.create"
+  ],
+  "edgenetwork.networks.insert": [
+    "edgenetwork.networks.create"
+  ],
+  "firebasestorage.buckets.insert": [
+    "firebasestorage.buckets.create"
+  ],
+  "iamworkforcepool.keys.insert": [
+    "iamworkforcepool.keys.create"
+  ],
+  "iamworkforcepool.tokens.insert": [
+    "iamworkforcepool.tokens.create"
+  ],
+  "iamworkforcepool.scimtenants.insert": [
+    "iamworkforcepool.scimtenants.create"
+  ],
+  "iamworkforcepool.workforcepools.insert": [
+    "iamworkforcepool.workforcepools.create"
+  ],
+  "dlp.deidentifytemplates.insert": [
+    "dlp.deidentifytemplates.create"
+  ],
+  "dlp.storedinfotypes.insert": [
+    "dlp.storedinfotypes.create"
+  ],
+  "dlp.discoveryconfigs.insert": [
+    "dlp.discoveryconfigs.create"
+  ],
+  "dlp.inspecttemplates.insert": [
+    "dlp.inspecttemplates.create"
+  ],
+  "dlp.jobtriggers.insert": [
+    "dlp.jobtriggers.create"
+  ],
+  "containeranalysis.occurrences.insert": [
+    "containeranalysis.occurrences.create"
+  ],
+  "cloudtasks.queues.insert": [
+    "cloudtasks.queues.create"
+  ],
+  "secretmanagerregional.secrets.insert": [
+    "secretmanagerregional.secrets.create"
+  ],
+  "colab.notebookruntimes.insert": [
+    "colab.notebookruntimes.create"
+  ],
+  "colab.notebookexecutionjobs.insert": [
+    "colab.notebookexecutionjobs.create"
+  ],
+  "colab.schedules.insert": [
+    "colab.schedules.create"
+  ],
+  "colab.notebookruntimetemplates.insert": [
+    "colab.notebookruntimetemplates.create"
+  ],
+  "cloudquotas.quotaadjustersettings.insert": [
+    "cloudquotas.quotaadjustersettings.create"
+  ],
+  "cloudquotas.quotapreferences.insert": [
+    "cloudquotas.quotapreferences.create"
+  ],
+  "pubsub.topics.insert": [
+    "pubsub.topics.create"
+  ],
+  "pubsub.schemas.insert": [
+    "pubsub.schemas.create"
+  ],
+  "spanner.instanceconfigs.insert": [
+    "spanner.instanceconfigs.create"
+  ],
+  "spanner.instances.insert": [
+    "spanner.instances.create"
+  ],
+  "spanner.databases.insert": [
+    "spanner.databases.create"
+  ],
+  "spanner.backupschedules.insert": [
+    "spanner.backupschedules.create"
+  ],
+  "spanner.instancepartitions.insert": [
+    "spanner.instancepartitions.create"
+  ],
+  "clouddeploy.targets.insert": [
+    "clouddeploy.targets.create"
+  ],
+  "clouddeploy.deliverypipelines.insert": [
+    "clouddeploy.deliverypipelines.create"
+  ],
+  "clouddeploy.customtargettypes.insert": [
+    "clouddeploy.customtargettypes.create"
+  ],
+  "clouddeploy.automations.insert": [
+    "clouddeploy.automations.create"
+  ],
+  "biglake.tables.insert": [
+    "biglake.tables.create"
+  ],
+  "biglake.databases.insert": [
+    "biglake.databases.create"
+  ],
+  "biglake.catalogs.insert": [
+    "biglake.catalogs.create"
+  ],
+  "gkehub2.features.insert": [
+    "gkehub2.features.create"
+  ],
+  "gkehub2.rbacrolebindings.insert": [
+    "gkehub2.rbacrolebindings.create"
+  ],
+  "gkehub2.scopes.insert": [
+    "gkehub2.scopes.create"
+  ],
+  "gkehub2.bindings.insert": [
+    "gkehub2.bindings.create"
+  ],
+  "gkehub2.namespaces.insert": [
+    "gkehub2.namespaces.create"
+  ],
+  "gkehub2.rolloutsequences.insert": [
+    "gkehub2.rolloutsequences.create"
+  ],
+  "gkehub2.fleets.insert": [
+    "gkehub2.fleets.create"
+  ],
+  "databasemigrationservice.privateconnections.insert": [
+    "databasemigrationservice.privateconnections.create"
+  ],
+  "bigquerydatapolicy.datapolicies.insert": [
+    "bigquerydatapolicy.datapolicies.create"
+  ],
+  "alloydb.backups.insert": [
+    "alloydb.backups.create"
+  ],
+  "alloydb.clusters.insert": [
+    "alloydb.clusters.create"
+  ],
+  "alloydb.users.insert": [
+    "alloydb.users.create"
+  ],
+  "dialogflowcx.webhooks.insert": [
+    "dialogflowcx.webhooks.create"
+  ],
+  "dialogflowcx.versions.insert": [
+    "dialogflowcx.versions.create"
+  ],
+  "dialogflowcx.intents.insert": [
+    "dialogflowcx.intents.create"
+  ],
+  "dialogflowcx.testcases.insert": [
+    "dialogflowcx.testcases.create"
+  ],
+  "dialogflowcx.agents.insert": [
+    "dialogflowcx.agents.create"
+  ],
+  "dialogflowcx.tools.insert": [
+    "dialogflowcx.tools.create"
+  ],
+  "dialogflowcx.playbooks.insert": [
+    "dialogflowcx.playbooks.create"
+  ],
+  "dialogflowcx.securitysettings.insert": [
+    "dialogflowcx.securitysettings.create"
+  ],
+  "dialogflowcx.flows.insert": [
+    "dialogflowcx.flows.create"
+  ],
+  "dialogflowcx.entitytypes.insert": [
+    "dialogflowcx.entitytypes.create"
+  ],
+  "dialogflowcx.pages.insert": [
+    "dialogflowcx.pages.create"
+  ],
+  "dialogflowcx.environments.insert": [
+    "dialogflowcx.environments.create"
+  ],
+  "dialogflowcx.generativesettings.insert": [
+    "dialogflowcx.generativesettings.create"
+  ],
+  "networksecurity.interceptendpointgroups.insert": [
+    "networksecurity.interceptendpointgroups.create"
+  ],
+  "networksecurity.securityprofiles.insert": [
+    "networksecurity.securityprofiles.create"
+  ],
+  "networksecurity.mirroringendpointgroups.insert": [
+    "networksecurity.mirroringendpointgroups.create"
+  ],
+  "networksecurity.firewallendpointassociations.insert": [
+    "networksecurity.firewallendpointassociations.create"
+  ],
+  "networksecurity.tlsinspectionpolicies.insert": [
+    "networksecurity.tlsinspectionpolicies.create"
+  ],
+  "networksecurity.mirroringendpoints.insert": [
+    "networksecurity.mirroringendpoints.create"
+  ],
+  "networksecurity.firewallendpoints.insert": [
+    "networksecurity.firewallendpoints.create"
+  ],
+  "networksecurity.authzpolicies.insert": [
+    "networksecurity.authzpolicies.create"
+  ],
+  "networksecurity.servertlspolicies.insert": [
+    "networksecurity.servertlspolicies.create"
+  ],
+  "networksecurity.mirroringdeployments.insert": [
+    "networksecurity.mirroringdeployments.create"
+  ],
+  "networksecurity.addressgroups.insert": [
+    "networksecurity.addressgroups.create"
+  ],
+  "networksecurity.interceptendpointgroupassociations.insert": [
+    "networksecurity.interceptendpointgroupassociations.create"
+  ],
+  "networksecurity.mirroringdeploymentgroups.insert": [
+    "networksecurity.mirroringdeploymentgroups.create"
+  ],
+  "networksecurity.rules.insert": [
+    "networksecurity.rules.create"
+  ],
+  "networksecurity.backendauthenticationconfigs.insert": [
+    "networksecurity.backendauthenticationconfigs.create"
+  ],
+  "networksecurity.sacattachments.insert": [
+    "networksecurity.sacattachments.create"
+  ],
+  "networksecurity.authorizationpolicies.insert": [
+    "networksecurity.authorizationpolicies.create"
+  ],
+  "networksecurity.ullmirroringcollectors.insert": [
+    "networksecurity.ullmirroringcollectors.create"
+  ],
+  "networksecurity.interceptdeploymentgroups.insert": [
+    "networksecurity.interceptdeploymentgroups.create"
+  ],
+  "networksecurity.urllists.insert": [
+    "networksecurity.urllists.create"
+  ],
+  "networksecurity.ullmirroringengines.insert": [
+    "networksecurity.ullmirroringengines.create"
+  ],
+  "networksecurity.mirroringendpointgroupassociations.insert": [
+    "networksecurity.mirroringendpointgroupassociations.create"
+  ],
+  "networksecurity.sacrealms.insert": [
+    "networksecurity.sacrealms.create"
+  ],
+  "networksecurity.gatewaysecuritypolicies.insert": [
+    "networksecurity.gatewaysecuritypolicies.create"
+  ],
+  "networksecurity.interceptdeployments.insert": [
+    "networksecurity.interceptdeployments.create"
+  ],
+  "networksecurity.clienttlspolicies.insert": [
+    "networksecurity.clienttlspolicies.create"
+  ],
+  "monitoring.services.insert": [
+    "monitoring.services.create"
+  ],
+  "monitoring.notificationchannels.insert": [
+    "monitoring.notificationchannels.create"
+  ],
+  "monitoring.metricsscopes.insert": [
+    "monitoring.metricsscopes.create"
+  ],
+  "monitoring.servicelevelobjectives.insert": [
+    "monitoring.servicelevelobjectives.create"
+  ],
+  "monitoring.metricdescriptors.insert": [
+    "monitoring.metricdescriptors.create"
+  ],
+  "monitoring.alertpolicies.insert": [
+    "monitoring.alertpolicies.create"
+  ],
+  "monitoring.groups.insert": [
+    "monitoring.groups.create"
+  ],
+  "cloudids.endpoints.insert": [
+    "cloudids.endpoints.create"
+  ],
+  "cloudrunv2.services.insert": [
+    "cloudrunv2.services.create"
+  ],
+  "cloudrunv2.workerpools.insert": [
+    "cloudrunv2.workerpools.create"
+  ],
+  "cloudrunv2.jobs.insert": [
+    "cloudrunv2.jobs.create"
+  ],
+  "cloudscheduler.jobs.insert": [
+    "cloudscheduler.jobs.create"
+  ],
+  "vmwareengine.subnets.insert": [
+    "vmwareengine.subnets.create"
+  ],
+  "vmwareengine.privateclouds.insert": [
+    "vmwareengine.privateclouds.create"
+  ],
+  "vmwareengine.vmwareenginenetworks.insert": [
+    "vmwareengine.vmwareenginenetworks.create"
+  ],
+  "vmwareengine.clusters.insert": [
+    "vmwareengine.clusters.create"
+  ],
+  "vmwareengine.externaladdresses.insert": [
+    "vmwareengine.externaladdresses.create"
+  ],
+  "vmwareengine.externalaccessrules.insert": [
+    "vmwareengine.externalaccessrules.create"
+  ],
+  "vmwareengine.networkpolicies.insert": [
+    "vmwareengine.networkpolicies.create"
+  ],
+  "dns.responsepolicies.insert": [
+    "dns.responsepolicies.create"
+  ],
+  "dns.policies.insert": [
+    "dns.policies.create"
+  ],
+  "dns.rules.insert": [
+    "dns.rules.create"
+  ],
+  "dns.managedzones.insert": [
+    "dns.managedzones.create"
+  ],
+  "integrationconnectors.endpointattachments.insert": [
+    "integrationconnectors.endpointattachments.create"
+  ],
+  "integrationconnectors.managedzones.insert": [
+    "integrationconnectors.managedzones.create"
+  ],
+  "cloudbuildv2.repositories.insert": [
+    "cloudbuildv2.repositories.create"
+  ],
+  "oracledatabase.cloudexadatainfrastructures.insert": [
+    "oracledatabase.cloudexadatainfrastructures.create"
+  ],
+  "oracledatabase.cloudvmclusters.insert": [
+    "oracledatabase.cloudvmclusters.create"
+  ],
+  "oracledatabase.autonomousdatabases.insert": [
+    "oracledatabase.autonomousdatabases.create"
+  ],
+  "oracledatabase.odbnetworks.insert": [
+    "oracledatabase.odbnetworks.create"
+  ],
+  "oracledatabase.odbsubnets.insert": [
+    "oracledatabase.odbsubnets.create"
+  ],
+  "dataform.config.insert": [
+    "dataform.config.create"
+  ],
+  "dataform.repositories.insert": [
+    "dataform.repositories.create"
+  ],
+  "notebooks.runtimes.insert": [
+    "notebooks.runtimes.create"
+  ],
+  "notebooks.instances.insert": [
+    "notebooks.instances.create"
+  ],
+  "notebooks.environments.insert": [
+    "notebooks.environments.create"
+  ],
+  "parametermanager.versions.insert": [
+    "parametermanager.versions.create"
+  ],
+  "parametermanager.parameters.insert": [
+    "parametermanager.parameters.create"
+  ],
+  "logging.settings.insert": [
+    "logging.settings.create"
+  ],
+  "logging.metrics.insert": [
+    "logging.metrics.create"
+  ],
+  "logging.links.insert": [
+    "logging.links.create"
+  ],
+  "logging.savedqueries.insert": [
+    "logging.savedqueries.create"
+  ],
+  "logging.views.insert": [
+    "logging.views.create"
+  ],
+  "logging.logscopes.insert": [
+    "logging.logscopes.create"
+  ],
+  "datapipeline.pipelines.insert": [
+    "datapipeline.pipelines.create"
+  ],
+  "datacatalog.tagtemplates.insert": [
+    "datacatalog.tagtemplates.create"
+  ],
+  "datacatalog.policytags.insert": [
+    "datacatalog.policytags.create"
+  ],
+  "datacatalog.entries.insert": [
+    "datacatalog.entries.create"
+  ],
+  "datacatalog.taxonomies.insert": [
+    "datacatalog.taxonomies.create"
+  ],
+  "datacatalog.entrygroups.insert": [
+    "datacatalog.entrygroups.create"
+  ],
+  "datacatalog.tags.insert": [
+    "datacatalog.tags.create"
+  ],
+  "osconfig.guestpolicies.insert": [
+    "osconfig.guestpolicies.create"
+  ],
+  "migrationcenter.groups.insert": [
+    "migrationcenter.groups.create"
+  ],
+  "apigateway.apis.insert": [
+    "apigateway.apis.create"
+  ],
+  "apigateway.configs.insert": [
+    "apigateway.configs.create"
+  ],
+  "apigateway.gateways.insert": [
+    "apigateway.gateways.create"
+  ],
+  "metastore.federations.insert": [
+    "metastore.federations.create"
+  ],
+  "metastore.services.insert": [
+    "metastore.services.create"
+  ],
+  "pubsublite.subscriptions.insert": [
+    "pubsublite.subscriptions.create"
+  ],
+  "pubsublite.topics.insert": [
+    "pubsublite.topics.create"
+  ],
+  "pubsublite.reservations.insert": [
+    "pubsublite.reservations.create"
+  ],
+  "certificatemanager.dnsauthorizations.insert": [
+    "certificatemanager.dnsauthorizations.create"
+  ],
+  "certificatemanager.certificatemapentries.insert": [
+    "certificatemanager.certificatemapentries.create"
+  ],
+  "certificatemanager.certificatemaps.insert": [
+    "certificatemanager.certificatemaps.create"
+  ],
+  "certificatemanager.trustconfigs.insert": [
+    "certificatemanager.trustconfigs.create"
+  ],
+  "certificatemanager.certificates.insert": [
+    "certificatemanager.certificates.create"
+  ],
+  "certificatemanager.certificateissuanceconfigs.insert": [
+    "certificatemanager.certificateissuanceconfigs.create"
+  ],
+  "firebaseextensions..insert": [
+    "firebaseextensions..create"
+  ],
+  "dataproc.sessiontemplates.insert": [
+    "dataproc.sessiontemplates.create"
+  ],
+  "iambeta.workloadidentitypools.insert": [
+    "iambeta.workloadidentitypools.create"
+  ],
+  "iambeta.namespaces.insert": [
+    "iambeta.namespaces.create"
+  ],
+  "iambeta.providers.insert": [
+    "iambeta.providers.create"
+  ],
+  "iambeta.managedidentities.insert": [
+    "iambeta.managedidentities.create"
+  ],
+  "sql.databases.insert": [
+    "sql.databases.create"
+  ]
+}

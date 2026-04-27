@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tf-iam"
+version = "0.1.0"
+description = "Automate Terraform Apply/Destroy and map IAM permissions."
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = []
+
+[project.scripts]
+tf-iam = "tf_iam.tf_runner:main"
+
+[tool.setuptools.packages]
+find = {where = ["src"]}
