@@ -1,4 +1,5 @@
 name: Run Python Tests
+run-name: TF-IAM Test Suite Execution
 
 on:
   push:
