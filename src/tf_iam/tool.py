@@ -7,7 +7,7 @@ import datetime
 from tf_iam.rules_engine import evaluate_conditional_permissions
 
 # --- 1. Fetch API Method ID from Discovery Document ---
-def find_gcp_api_method(discovery_url, target_http_method, target_path):
+def find_gcp_api_method(discovery_url, target_http_method, target_path, quiet=False):
     # Caching logic
     cache_dir = os.path.join(".cache", "discovery")
     os.makedirs(cache_dir, exist_ok=True)
@@ -40,8 +40,9 @@ def find_gcp_api_method(discovery_url, target_http_method, target_path):
                 with open(cache_path, 'w') as f:
                     f.write(raw_data)
         except Exception as e:
-            print(f"\n❌ Error fetching Discovery URL {discovery_url}: {e}")
-            print("💡 Tip: If you are on a corporate network, make sure you are authenticated (e.g., run 'gcert' or check your SSO tickets).")
+            if not quiet:
+                print(f"\n❌ Error fetching Discovery URL {discovery_url}: {e}")
+                print("💡 Tip: If you are on a corporate network, make sure you are authenticated (e.g., run 'gcert' or check your SSO tickets).")
             return None
         
     def search_resources(resources):
@@ -290,7 +291,13 @@ def process_terraform_log(log_file_path):
             except ValueError:
                 api_path = clean_path
 
-            method_id = find_gcp_api_method(discovery_url, http_method, api_path)
+            method_id = find_gcp_api_method(discovery_url, http_method, api_path, quiet=True)
+            
+            if not method_id:
+                # Try fallback service-specific discovery URL
+                fallback_url = f"https://{api_name}.googleapis.com/$discovery/rest?version={api_version}"
+                method_id = find_gcp_api_method(fallback_url, http_method, api_path, quiet=False)
+
             if method_id:
                 # 👈 DEDUPLICATION CHECK!
                 sig = (method_id, http_method)
