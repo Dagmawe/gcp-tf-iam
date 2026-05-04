@@ -86,6 +86,8 @@ def main():
             sys.exit(1)
         print(f"\n--- 🔍 Parsing Permissions from User Log: {args.log_file} ---")
         process_terraform_log(args.log_file)
+    elif args.action in ["apply", "destroy"]:
+        run_terraform_and_parse(args.action)
 
 if __name__ == "__main__":
     main()
