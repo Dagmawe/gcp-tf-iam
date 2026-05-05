@@ -298,21 +298,26 @@ def process_terraform_log(log_file_path):
                 fallback_url = f"https://{api_name}.googleapis.com/$discovery/rest?version={api_version}"
                 method_id = find_gcp_api_method(fallback_url, http_method, api_path, quiet=False)
 
+            # Deduplicate based on method_id for successful matches
+            # For failed matches (method_id is None), deduplicate based on the full path to avoid repeating the same failed path
             if method_id:
-                # 👈 DEDUPLICATION CHECK!
                 sig = (method_id, http_method)
-                if sig in printed_signatures:
-                    continue
-                printed_signatures.add(sig)
+            else:
+                sig = (full_path, http_method)
 
-                sep = "-" * 50
-                print(sep)
-                report_lines.append(sep + "\n")
-                
-                msg = f"Detected TF Action: {http_method} {full_path}"
-                print(msg)
-                report_lines.append(msg + "\n")
-                
+            if sig in printed_signatures:
+                continue
+            printed_signatures.add(sig)
+
+            sep = "-" * 50
+            print(sep)
+            report_lines.append(sep + "\n")
+            
+            msg = f"Detected TF Action: {http_method} {full_path}"
+            print(msg)
+            report_lines.append(msg + "\n")
+
+            if method_id:
                 if request_body:
                     msg_keys = f"Payload keys: {list(request_body.keys())}"
                     print(msg_keys)
