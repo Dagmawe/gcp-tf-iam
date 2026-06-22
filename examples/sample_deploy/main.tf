@@ -1,84 +1,39 @@
-# Create a new GCP Project
-resource "google_project" "my_new_project" {
-  name       = "gcptestproject"
-  project_id = var.project_id
-
-  billing_account = "014CD6-C5F571-D1FFA4"
-  folder_id       = "663111463644"
-
+resource "google_project" "project" {
+  name                = var.project_name
+  project_id          = var.project_id
+  folder_id           = var.folder_id
+  billing_account     = var.billing_account
+  auto_create_network = false
 }
 
-# Enable the Compute Engine API
-resource "google_project_service" "compute_api" {
-  project = var.project_id
-  service = "compute.googleapis.com"
-
-  disable_on_destroy = false
-  depends_on         = [google_project.my_new_project]
+resource "google_compute_network" "network" {
+  name                            = var.network_name
+  auto_create_subnetworks         = false
+  routing_mode                    = "GLOBAL"
+  project                         = google_project.project.project_id
+  delete_default_routes_on_create = false
 }
 
-resource "google_compute_network" "test_vpc" {
-  name                    = "my-test-vpc-2026"
-  project                 = var.project_id
-  auto_create_subnetworks = false
-
-  # 👈 Wait for the API to be fully enabled before creating networking
-  depends_on = [google_project_service.compute_api]
+resource "google_compute_subnetwork" "subnetwork" {
+  name                     = var.subnet_name
+  ip_cidr_range            = var.subnet_ip
+  region                   = var.subnet_region
+  network                  = google_compute_network.network.name
+  project                  = google_project.project.project_id
+  private_ip_google_access = false
 }
 
-resource "google_compute_subnetwork" "test_subnet" {
-  name          = "my-test-subnet-2026"
-  project       = var.project_id
-  ip_cidr_range = "10.0.1.0/24"
-  region        = "us-central1"
-  network       = google_compute_network.test_vpc.id
-  depends_on    = [google_project_service.compute_api]
+output "project_id" {
+  description = "The ID of the created project."
+  value       = google_project.project.project_id
 }
 
-resource "google_storage_bucket" "my_bucket" {
-  project  = var.project_id
-  name     = "my-unique-simple-gcp-bucket-2026-demo1" # 👈 Made globally unique!
-  location = "US"
-
-  storage_class = "STANDARD"
-
-  uniform_bucket_level_access = true
-
-  # Allows Terraform to delete the bucket even if it contains objects (useful for testing)
-  force_destroy = true
-
-  # Good security practice: prevents making the bucket public
-  public_access_prevention = "enforced"
+output "network_id" {
+  description = "The ID of the created VPC network."
+  value       = google_compute_network.network.id
 }
 
-
-# Create a simple Compute Engine VM
-resource "google_compute_instance" "test_vm" {
-  project      = var.project_id
-  name         = "my-test-vm-2026"
-  machine_type = "f1-micro" # The smallest and cheapest VM type
-  zone         = "us-central1-a"
-  depends_on   = [google_project_service.compute_api]
-
-
-  # Define the Operating System image
-  boot_disk {
-    initialize_params {
-      image = "debian-cloud/debian-12"
-    }
-  }
-
-  # Connect it to the newly created VPC network
-  network_interface {
-    network    = google_compute_network.test_vpc.id
-    subnetwork = google_compute_subnetwork.test_subnet.id
-  }
-
-  # Enable Shielded VM features to satisfy Org Policy constraint
-  shielded_instance_config {
-    enable_secure_boot = true
-  }
+output "subnet_id" {
+  description = "The ID of the created subnet."
+  value       = google_compute_subnetwork.subnetwork.id
 }
-
-
-
