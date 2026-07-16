@@ -5,13 +5,18 @@ import argparse
 from tf_iam.tool import process_terraform_log
 from tf_iam.rules_engine import evaluate_conditional_permissions
 
-def run_terraform_and_parse(action=None):
+def run_terraform_and_parse(action=None, var_file=None):
     # 1. Prepare environment with debug logging
     env = os.environ.copy()
     env["TF_LOG"] = "DEBUG"
     
     log_file = "tf_apply_debug.log"
-    print(f"🚀 Running 'terraform apply -auto-approve' and capturing logs to {log_file}...\n")
+    
+    tf_cmd = ["terraform", action, "-auto-approve"]
+    if var_file:
+        tf_cmd.append(f"-var-file={var_file}")
+        
+    print(f"🚀 Running '{' '.join(tf_cmd)}' and capturing logs to {log_file}...\n")
         
     # 1.5 Initialize Terraform
     print("📦 Initializing Terraform...")
@@ -21,11 +26,12 @@ def run_terraform_and_parse(action=None):
     # 2. Run Terraform and redirect stderr (debug logs) to the file
     with open(log_file, "w") as f:
         process = subprocess.run(
-            ["terraform", action, "-auto-approve"],
+            tf_cmd,
             env=env,
             stdout=None,
             stderr=f
         )
+
     
     if process.returncode != 0:
         print(f"\n❌ Terraform apply failed with exit code {process.returncode}")
@@ -71,6 +77,11 @@ def main():
         type=str,
         help="Path to an existing Terraform debug log file to parse directly (used with action='parse')."
     )
+    parser.add_argument(
+        "--var-file",
+        type=str,
+        help="Path to a Terraform variables file (passed as -var-file to terraform commands)."
+    )
     args = parser.parse_args()
     
     if not args.action:
@@ -87,7 +98,8 @@ def main():
         print(f"\n--- 🔍 Parsing Permissions from User Log: {args.log_file} ---")
         process_terraform_log(args.log_file)
     elif args.action in ["apply", "destroy"]:
-        run_terraform_and_parse(args.action)
+        run_terraform_and_parse(args.action, args.var_file)
+
 
 if __name__ == "__main__":
     main()
