@@ -61,25 +61,37 @@ Make sure your corporate SSO ticketing is refreshed (e.g., run `gcert` if your o
 
 ## ⚙️ Usage
 
-### 1. Run an Apply and map permissions:
+### 1. Run an Apply and map permissions (prompts for confirmation):
 ```bash
 tf-iam apply
 ```
 
-### 2. Run a Destroy and map permissions:
+### 2. Run an Apply with automatic approval:
+```bash
+tf-iam apply --auto-approve
+```
+
+### 3. Run a Destroy and map permissions (prompts for confirmation):
 ```bash
 tf-iam destroy
 ```
 
-### 3. Parse an existing log offline:
+### 4. Parse an existing log offline:
 ```bash
 tf-iam parse --log-file /path/to/existing_debug.log
 ```
 
-### 4. See the Help Menu:
+### 5. Run Apply or Destroy with a variables file:
+```bash
+tf-iam apply --var-file production.tfvars
+```
+
+### 6. See the Help Menu:
 ```bash
 tf-iam --help
 ```
+
+
 
 ---
 

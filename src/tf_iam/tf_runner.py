@@ -5,14 +5,16 @@ import argparse
 from tf_iam.tool import process_terraform_log
 from tf_iam.rules_engine import evaluate_conditional_permissions
 
-def run_terraform_and_parse(action=None, var_file=None):
+def run_terraform_and_parse(action=None, var_file=None, auto_approve=False):
     # 1. Prepare environment with debug logging
     env = os.environ.copy()
     env["TF_LOG"] = "DEBUG"
     
     log_file = "tf_apply_debug.log"
     
-    tf_cmd = ["terraform", action, "-auto-approve"]
+    tf_cmd = ["terraform", action]
+    if auto_approve:
+        tf_cmd.append("-auto-approve")
     if var_file:
         tf_cmd.append(f"-var-file={var_file}")
         
@@ -31,6 +33,7 @@ def run_terraform_and_parse(action=None, var_file=None):
             stdout=None,
             stderr=f
         )
+
 
     
     if process.returncode != 0:
@@ -82,6 +85,11 @@ def main():
         type=str,
         help="Path to a Terraform variables file (passed as -var-file to terraform commands)."
     )
+    parser.add_argument(
+        "--auto-approve",
+        action="store_true",
+        help="Skip interactive approval of plan before applying or destroying."
+    )
     args = parser.parse_args()
     
     if not args.action:
@@ -98,7 +106,8 @@ def main():
         print(f"\n--- 🔍 Parsing Permissions from User Log: {args.log_file} ---")
         process_terraform_log(args.log_file)
     elif args.action in ["apply", "destroy"]:
-        run_terraform_and_parse(args.action, args.var_file)
+        run_terraform_and_parse(args.action, args.var_file, args.auto_approve)
+
 
 
 if __name__ == "__main__":
