@@ -45,29 +45,58 @@ def find_gcp_api_method(discovery_url, target_http_method, target_path, quiet=Fa
                 print("💡 Tip: If you are on a corporate network, make sure you are authenticated (e.g., run 'gcert' or check your SSO tickets).")
             return None
         
-    def search_resources(resources):
+    # Extract API name from discovery_url to help with path prefix stripping
+    api_name = ""
+    try:
+        api_name = discovery_url.split("/apis/")[1].split("/")[0]
+    except Exception:
+        pass
+        
+    def clean_prefix(path_str):
+        p = path_str.split('?')[0].strip("/")
+        parts = p.split("/")
+        if not parts or not parts[0]:
+            return p
+        
+        service_names = {api_name, "compute", "storage", "pubsub", "dns", "sql", "sqladmin", "serviceusage", "cloudresourcemanager", "iam", "v1", "v2"}
+        if parts[0] in service_names:
+            p = "/".join(parts[1:])
+            parts = p.split("/")
+            if parts and parts[0] and (parts[0].startswith("v") and any(c.isdigit() for c in parts[0])):
+                p = "/".join(parts[1:])
+        elif parts[0].startswith("v") and any(c.isdigit() for c in parts[0]):
+            p = "/".join(parts[1:])
+        return p
+
+    def search_resources(resources, parent_resource_name=None):
         for res_name, res_data in resources.items():
             if 'methods' in res_data:
                 for method_name, method_data in res_data['methods'].items():
                     # Only check if the HTTP Methods match first (POST == POST)
                     if method_data.get('httpMethod') == target_http_method:
                         
-                        # Grab the templated path from Google (e.g., projects/{project}/zones/{zone}/instances)
+                        # Grab the templated path from Google and strip leading service prefix and version (e.g., dns/v1/)
                         template_path = method_data.get('path', '')
+                        clean_template = clean_prefix(template_path)
                         
                         # Convert {variable} placeholders into Regex wildcards (.+?)
-                        # Remove strict string boundaries to allow Google's path to be found anywhere inside the TF path
-                        regex_pattern = re.sub(r'\{[^}]+\}', r'.+?', template_path)
+                        regex_pattern = re.sub(r'\{[^}]+\}', r'.+?', clean_template)
                         
-                        # Check if the real Terraform path matches our new wildcard pattern
-                        # Some Paths from TF have query string like ?alt=json which should be stripped before regex check happens
-                        clean_target_path = target_path.split('?')[0]
+                        # Clean the target path by stripping query strings, leading service prefixes, and version segments
+                        clean_target_path = clean_prefix(target_path)
+                        
                         if re.search(regex_pattern, clean_target_path):
+                            # If template is a generic placeholder like {+name} or {+topic},
+                            # we must verify that the current resource group name (res_name)
+                            # is present in the target path to prevent false positive matching.
+                            if "{+" in template_path:
+                                if res_name and res_name not in clean_target_path:
+                                    continue
                             return method_data.get('id')
             
             # Dig deeper if there are nested resources
             if 'resources' in res_data:
-                result = search_resources(res_data['resources'])
+                result = search_resources(res_data['resources'], res_name)
                 if result:
                     return result
         return None
@@ -261,6 +290,20 @@ def process_terraform_log(log_file_path):
         # Skip extremely generic polling paths to keep the output clean
         if "nextPageToken" in full_path or "state%3AENABLED" in full_path:
             continue
+            
+        # Fast-track check for generic operations polling (no IAM required)
+        if "/operations/" in full_path or "operation-mock-12345" in full_path:
+            msg_action = f"Detected TF Action: {http_method} {full_path}"
+            print("-" * 50)
+            print(msg_action)
+            report_lines.append("-" * 50 + "\n" + msg_action + "\n")
+            msg_mapped = f"Mapped API Method:  operations.get"
+            print(msg_mapped)
+            report_lines.append(msg_mapped + "\n")
+            msg_iam = f"✅ Required IAM:      []"
+            print(msg_iam)
+            report_lines.append(msg_iam + "\n")
+            continue
         
         # Extract API Name from Host Header if available
         # e.g., Host: cloudbilling.googleapis.com -> api_name = cloudbilling
@@ -280,6 +323,34 @@ def process_terraform_log(log_file_path):
             api_version = parts[1] if (len(parts) > 1 and parts[1].startswith('v')) else None
             if not api_version:
                 api_version = 'v1' # Fallback default
+            
+            # Translate client service prefixes (e.g. from dry-run overrides) to canonical Discovery API names
+            discovery_names = {
+                "resource_manager": "cloudresourcemanager",
+                "resource_manager_v3": "cloudresourcemanager",
+                "cloud_resource_manager": "cloudresourcemanager",
+                "service_usage": "serviceusage",
+                "iam": "iam",
+                "sql": "sqladmin",
+                "big_query": "bigquery",
+                "cloud_billing": "cloudbilling",
+                "kms": "cloudkms",
+                "secret_manager": "secretmanager",
+                "source_repo": "sourcerepo",
+                "pubsub_lite": "pubsublite",
+            }
+            if api_name in discovery_names:
+                api_name = discovery_names[api_name]
+
+            # Map fallback version-based api_names (due to hostname overrides to localhost in dry-run) to canonical GCP API names
+            if api_name in ["v1", "v2", "v3", "v1beta1", "v1beta2", "v1beta3", "v1beta4"]:
+                if "billing" in clean_path:
+                    api_name = "cloudbilling"
+                elif "services" in clean_path:
+                    api_name = "serviceusage"
+                elif "projects" in clean_path:
+                    api_name = "cloudresourcemanager"
+
             
             # Dynamically build the Discovery URL
             discovery_url = f"https://www.googleapis.com/discovery/v1/apis/{api_name}/{api_version}/rest"

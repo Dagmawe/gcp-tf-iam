@@ -37,3 +37,65 @@ output "subnet_id" {
   description = "The ID of the created subnet."
   value       = google_compute_subnetwork.subnetwork.id
 }
+
+resource "google_pubsub_topic" "test-topic" {
+  name    = "test-topic"
+  project = google_project.project.project_id
+}
+
+resource "google_storage_bucket" "test-bucket" {
+  name                        = "test-bucket-tf-iam-dryrun-example"
+  location                    = "US"
+  project                     = google_project.project.project_id
+  uniform_bucket_level_access = true
+}
+
+resource "google_compute_instance" "vm" {
+  name         = "test-instance"
+  project      = google_project.project.project_id
+  machine_type = "e2-medium"
+  zone         = "us-central1-a"
+
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-11"
+    }
+    kms_key_self_link = "projects/test-project1/locations/us-central1/keyRings/my-keyring/cryptoKeys/my-key"
+  }
+
+  network_interface {
+    network    = google_compute_network.network.id
+    subnetwork = google_compute_subnetwork.subnetwork.id
+  }
+}
+
+resource "google_service_account" "sa" {
+  account_id   = "test-sa"
+  display_name = "Test Service Account"
+  project      = google_project.project.project_id
+}
+
+resource "google_project_iam_member" "sa-member" {
+  project = google_project.project.project_id
+  role    = "roles/viewer"
+  member  = "serviceAccount:${google_service_account.sa.email}"
+}
+
+resource "google_dns_managed_zone" "dns-zone" {
+  name        = "test-zone"
+  dns_name    = "testzone.example.com."
+  description = "Test DNS Zone"
+  project     = google_project.project.project_id
+}
+
+resource "google_sql_database_instance" "db" {
+  name             = "test-db-instance"
+  region           = "us-central1"
+  database_version = "POSTGRES_14"
+  project          = google_project.project.project_id
+  settings {
+    tier = "db-f1-micro"
+  }
+}
+
+
