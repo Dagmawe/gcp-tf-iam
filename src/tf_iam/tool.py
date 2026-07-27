@@ -278,6 +278,7 @@ def process_terraform_log(log_file_path):
 
     # Process each unique API call found in the log
     printed_signatures = set()
+    total_permissions = set()
     for call in found_calls:
         http_method = call['method']
         full_path = call['path']
@@ -403,6 +404,7 @@ def process_terraform_log(log_file_path):
                 
                 # Merge and deduplicate
                 all_permissions = list(set(base_permissions + cond_permissions))
+                total_permissions.update(all_permissions)
                 
                 msg_iam = f"✅ Required IAM:      {all_permissions}"
                 print(msg_iam)
@@ -420,6 +422,21 @@ def process_terraform_log(log_file_path):
             msg_warn2 = "⚠️ URL path is too short to parse dynamically."
             print(msg_warn2)
             report_lines.append(msg_warn2 + "\n")
+
+    # Generate and append aggregated unique permissions summary
+    clean_permissions = sorted(list(total_permissions - {"Mapping not found in dataset"}))
+    
+    summary_lines = []
+    summary_lines.append("\n" + "=" * 50 + "\n")
+    summary_lines.append("🔑 AGGREGATED IAM PERMISSIONS SUMMARY\n")
+    summary_lines.append("=" * 50 + "\n")
+    for perm in clean_permissions:
+        summary_lines.append(f"- {perm}\n")
+    summary_lines.append("=" * 50 + "\n")
+    
+    summary_str = "".join(summary_lines)
+    print(summary_str)
+    report_lines.extend(summary_lines)
 
     # Write report to file
     reports_dir = os.path.join(".cache", "reports")

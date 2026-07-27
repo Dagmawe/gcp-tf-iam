@@ -101,7 +101,7 @@ def run_terraform_and_parse(action=None, var_file=None, auto_approve=False, dry_
 
 
     tf_cmd = ["terraform", action]
-    if auto_approve:
+    if auto_approve or dry_run:
         tf_cmd.append("-auto-approve")
     if var_file:
         tf_cmd.append(f"-var-file={var_file}")
