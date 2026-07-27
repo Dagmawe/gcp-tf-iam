@@ -1,4 +1,24 @@
 {
+  "sql.instances.insert": [
+    "cloudsql.instances.create"
+  ],
+  "sql.instances.get": [
+    "cloudsql.instances.get"
+  ],
+  "sql.instances.update": [
+    "cloudsql.instances.update"
+  ],
+  "sql.instances.delete": [
+    "cloudsql.instances.delete"
+  ],
+  "cloudresourcemanager.operations.get": [],
+  "cloudbilling.projects.updateBillingInfo": [
+    "resourcemanager.projects.createBillingAssignment"
+  ],
+  "cloudbilling.projects.getBillingInfo": [
+    "resourcemanager.projects.get"
+  ],
+  "cloudbilling.billingAccounts.testIamPermissions": [],
   "compute.instances.insert": [
     "compute.instances.create",
     "compute.instances.setMetadata",

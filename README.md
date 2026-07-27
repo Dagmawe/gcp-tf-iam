@@ -12,6 +12,7 @@ Perfect for auditing exactly what permissions your Service Account uses, or for 
 -   **Dynamic API Mapping**: Resolves raw HTTP paths into readable GCP API Methods (e.g., `storage.buckets.get`) using the official Google Discovery API.
 -   **Least-Privilege Auditing**: Lists the exact IAM permissions your Terraform run *actually used*.
 -   **Deep Inspection for Write Actions**: Automatically inspects JSON payloads to find "hidden" permissions (like `compute.images.useReadOnly` inside VM creation).
+-   **Dry-Run Auditing (Default)**: Runs Terraform operations in offline dry-run mode against a local mock server to capture permissions without actual deployment.
 -   **Fast Caching**: Caches Discovery Documents and IAM maps locally in `.cache/` to speed up subsequent runs.
 ---
 
@@ -19,9 +20,9 @@ Perfect for auditing exactly what permissions your Service Account uses, or for 
 
 1.  **Python 3.x** (Using standard libraries).
 2.  **Terraform CLI** installed and in your system PATH.
-3.  **Google Cloud SDK (`gcloud`)** for authentication.
+3.  **Google Cloud SDK (`gcloud`)** for authentication (only needed if running in `--live` mode).
 
-Make sure you are authenticated with Application Default Credentials:
+Make sure you are authenticated with Application Default Credentials if running `--live`:
 ```bash
 gcloud auth application-default login
 ```
@@ -32,10 +33,13 @@ gcloud auth application-default login
 
 ```text
 /
-├── tf_runner.py       # Orchestrates Terraform Apply/Destroy + runs tool.py
-├── tool.py            # The log parser & API Mapper
-├── rules_engine.py    # Deep inspection rules for complex resources
-└── examples/          # Sample Terraform deployment scenarios
+├── src/tf_iam/
+│   ├── tf_runner.py       # Orchestrates Terraform Apply/Destroy
+│   ├── tool.py            # The log parser & API Mapper
+│   ├── rules_engine.py    # Deep inspection rules for complex resources
+│   └── mock_server.py     # Local mock server for offline dry-run simulations
+├── examples/              # Sample Terraform deployment scenarios
+└── tests/                 # Unit test suite
 ```
 
 ---
@@ -61,35 +65,40 @@ Make sure your corporate SSO ticketing is refreshed (e.g., run `gcert` if your o
 
 ## ⚙️ Usage
 
-### 1. Run an Apply and map permissions (prompts for confirmation):
+### 1. Run a Dry-Run Apply (Default, offline mock server):
+Audits permissions for a planned deployment without creating any real GCP resources.
 ```bash
-tf-iam apply
+tf-iam apply --var-file dry_run.tfvars --auto-approve
 ```
 
-### 2. Run an Apply with automatic approval:
+### 2. Run a Live Apply (Opt-in, deploys to real GCP):
+Deploys real resources onto GCP and records the exact permissions used by the live apply.
 ```bash
-tf-iam apply --auto-approve
+tf-iam apply --live --var-file production.tfvars --auto-approve
 ```
 
-### 3. Run a Destroy and map permissions (prompts for confirmation):
+### 3. Run a Dry-Run Destroy:
+Audits permissions needed to destroy resources without modifying real resources.
 ```bash
-tf-iam destroy
+tf-iam destroy --var-file dry_run.tfvars --auto-approve
 ```
 
-### 4. Parse an existing log offline:
+### 4. Run a Live Destroy (deletes real GCP resources):
+```bash
+tf-iam destroy --live --var-file production.tfvars --auto-approve
+```
+
+### 5. Parse an existing log file offline:
+Parses any pre-existing Terraform debug log file to extract IAM permissions (useful for CI/CD audit jobs).
 ```bash
 tf-iam parse --log-file /path/to/existing_debug.log
-```
-
-### 5. Run Apply or Destroy with a variables file:
-```bash
-tf-iam apply --var-file production.tfvars
 ```
 
 ### 6. See the Help Menu:
 ```bash
 tf-iam --help
 ```
+
 
 
 
