@@ -4,6 +4,8 @@ resource "google_project" "project" {
   folder_id           = var.folder_id
   billing_account     = var.billing_account
   auto_create_network = false
+  # Provider default is "PREVENT", which blocks `terraform destroy` (and therefore a destroy dry-run).
+  deletion_policy = "DELETE"
 }
 
 resource "google_compute_network" "network" {
@@ -93,6 +95,8 @@ resource "google_sql_database_instance" "db" {
   region           = "us-central1"
   database_version = "POSTGRES_14"
   project          = google_project.project.project_id
+  # Provider default is true, which blocks `terraform destroy` (and therefore a destroy dry-run).
+  deletion_protection = false
   settings {
     tier = "db-f1-micro"
   }
