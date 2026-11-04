@@ -1,4 +1,5 @@
 import json
+import os
 import re
 import sys
 from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -38,6 +39,14 @@ class GCPMockHandler(BaseHTTPRequestHandler):
                 if "/instances/" in clean_path:
                     if "status" not in resp:
                         resp["status"] = "RUNNING"
+                # Zonal/regional resources: the provider reads zone/region back from the API response
+                # (e.g. "Cannot determine zone" on refresh/destroy if missing), so derive them from the path.
+                zone_match = re.search(r"/zones/([^/]+)/", clean_path)
+                if zone_match and "zone" not in resp:
+                    resp["zone"] = zone_match.group(1)
+                region_match = re.search(r"/regions/([^/]+)/", clean_path)
+                if region_match and "region" not in resp:
+                    resp["region"] = region_match.group(1)
                 
                 # Apply generic active/ready state fields to satisfy provider wait loops on other resources
                 if "status" not in resp:
@@ -334,7 +343,10 @@ class GCPMockHandler(BaseHTTPRequestHandler):
         try:
             req_data = json.loads(body_str) if body_str else {}
             clean_path = self.path.split("?")[0].rstrip("/")
-            if self.command in ["PUT", "PATCH"]:
+            if self.command == "DELETE":
+                if hasattr(self.server, "mock_resources"):
+                    self.server.mock_resources.pop(clean_path, None)
+            elif self.command in ["PUT", "PATCH"]:
                 if hasattr(self.server, "mock_resources"):
                     self.server.mock_resources[clean_path] = req_data
             else: # POST
@@ -365,22 +377,46 @@ class GCPMockHandler(BaseHTTPRequestHandler):
         self.do_POST()
 
 class MockServer:
-    def __init__(self, host="127.0.0.1", port=8080):
+    def __init__(self, host="127.0.0.1", port=8080, state_file=None):
         self.host = host
         self.port = port
+        self.state_file = state_file
         self.server = None
         self.thread = None
 
+    def _load_state(self):
+        """Resources created by a previous dry-run (e.g. apply) so a later destroy can find them."""
+        if self.state_file and os.path.exists(self.state_file):
+            try:
+                with open(self.state_file, "r") as f:
+                    return json.load(f)
+            except Exception as e:
+                print(f"⚠️ Could not read mock state {self.state_file} ({e}); starting empty.")
+        return {}
+
+    def _save_state(self):
+        if not self.state_file or self.server is None:
+            return
+        try:
+            os.makedirs(os.path.dirname(os.path.abspath(self.state_file)), exist_ok=True)
+            with open(self.state_file, "w") as f:
+                json.dump(self.server.mock_resources, f, indent=2)
+        except Exception as e:
+            print(f"⚠️ Could not save mock state to {self.state_file}: {e}")
+
     def start(self):
         self.server = HTTPServer((self.host, self.port), GCPMockHandler)
-        self.server.mock_resources = {}
+        self.server.mock_resources = self._load_state()
         self.thread = threading.Thread(target=self.server.serve_forever, daemon=True)
         self.thread.start()
         print(f"📡 Started local GCP Mock Server on http://{self.host}:{self.port}")
+        if self.server.mock_resources:
+            print(f"   (loaded {len(self.server.mock_resources)} mocked resources from {self.state_file})")
 
 
     def stop(self):
         if self.server:
+            self._save_state()
             self.server.shutdown()
             self.server.server_close()
             print("📡 Stopped local GCP Mock Server.")
