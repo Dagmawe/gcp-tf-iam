@@ -68,6 +68,9 @@ def find_gcp_api_method(discovery_url, target_http_method, target_path, quiet=Fa
             p = "/".join(parts[1:])
         return p
 
+    # Clean the target path once: strip query string, leading service prefix and version segment
+    clean_target_path = clean_prefix(target_path)
+
     def search_resources(resources, parent_resource_name=None):
         for res_name, res_data in resources.items():
             if 'methods' in res_data:
@@ -79,13 +82,10 @@ def find_gcp_api_method(discovery_url, target_http_method, target_path, quiet=Fa
                         template_path = method_data.get('path', '')
                         clean_template = clean_prefix(template_path)
                         
-                        # Convert {variable} placeholders into Regex wildcards (.+?)
-                        regex_pattern = re.sub(r'\{[^}]+\}', r'.+?', clean_template)
-                        
-                        # Clean the target path by stripping query strings, leading service prefixes, and version segments
-                        clean_target_path = clean_prefix(target_path)
-                        
-                        if re.search(regex_pattern, clean_target_path):
+                        # The whole path must match the template (not just a substring), otherwise
+                        # e.g. ".../instances/{instance}/setMetadata" would resolve to instances.insert
+                        # and ".../instances/{instance}" would resolve to zones.get.
+                        if re.fullmatch(_template_to_regex(clean_template), clean_target_path):
                             # If template is a generic placeholder like {+name} or {+topic},
                             # we must verify that the current resource group name (res_name)
                             # is present in the target path to prevent false positive matching.
@@ -101,6 +101,22 @@ def find_gcp_api_method(discovery_url, target_http_method, target_path, quiet=Fa
                     return result
         return None
     return search_resources(data.get('resources', {}))
+
+
+def _template_to_regex(template):
+    """Convert a Discovery path template into an anchored regex pattern.
+
+    `{var}` matches exactly one path segment, `{+var}` (reserved expansion) may span
+    several segments, and all literal text is escaped.
+    """
+    pattern = ""
+    pos = 0
+    for match in re.finditer(r'\{(\+?)[^}]+\}', template):
+        pattern += re.escape(template[pos:match.start()])
+        pattern += ".+" if match.group(1) else "[^/]+"
+        pos = match.end()
+    pattern += re.escape(template[pos:])
+    return pattern
 
 # --- 2. Map Method ID to IAM Permissions ---
 def get_iam_permission(api_method_id):
@@ -201,6 +217,10 @@ def process_terraform_log(log_file_path):
                 prefix_match = re.search(r"\] (provider[^\s:]*):\s+(.*)", line)
                 if prefix_match:
                     payload_line = prefix_match.group(2)
+                elif re.search(r"\] provider[^\s:]*\s*$", line):
+                    # A bare logger prefix with no message is how Terraform logs an empty line,
+                    # i.e. the separator between the HTTP headers and the JSON body.
+                    payload_line = ""
                 else:
                     payload_line = line.strip('\n')
 
@@ -262,7 +282,15 @@ def process_terraform_log(log_file_path):
                             in_headers = False
                         continue
                     
-                    # Not in headers, capture JSON body
+                    # Not in headers, capture JSON body. The dump is closed by a line of dashes
+                    # ("-----..."), which must not end up in the JSON buffer.
+                    if re.fullmatch(r"-{5,}\s*", payload_line):
+                        if 'method' in current_call:
+                            _save_call(current_call, json_buffer, found_calls)
+                        in_request = False
+                        current_call = {}
+                        json_buffer = []
+                        continue
                     json_buffer.append(payload_line + "\n")
 
             # End of file
@@ -310,6 +338,7 @@ def process_terraform_log(log_file_path):
         # e.g., Host: cloudbilling.googleapis.com -> api_name = cloudbilling
         # Host: storage.googleapis.com -> api_name = storage
         api_name = None
+        api_name_from_path = False
         if 'host' in call and call['host'].endswith('.googleapis.com'):
             api_name = call['host'].split('.')[0]
         clean_path = full_path.split('?')[0].strip("/")
@@ -317,6 +346,7 @@ def process_terraform_log(log_file_path):
         if len(parts) >= 2 or api_name:
             if not api_name:
                 api_name = parts[0]      # fallback if api name not found 
+                api_name_from_path = True
             
             # The version is usually the first part of the path that looks like v1, v2beta, etc.
             # E.g., /v1/billingAccounts -> v1
@@ -361,7 +391,13 @@ def process_terraform_log(log_file_path):
                 version_index = parts.index(api_version)
                 api_path = "/".join(parts[version_index:])
             except ValueError:
-                api_path = clean_path
+                # No version segment in the path. This is typical for dry-run custom endpoints such as
+                # http://localhost:8080/resource_manager/ -> "/resource_manager/projects", so drop the
+                # service-prefix segment that we already consumed as the API name.
+                if api_name_from_path and len(parts) > 1:
+                    api_path = "/".join(parts[1:])
+                else:
+                    api_path = clean_path
 
             method_id = find_gcp_api_method(discovery_url, http_method, api_path, quiet=True)
             
@@ -370,15 +406,23 @@ def process_terraform_log(log_file_path):
                 fallback_url = f"https://{api_name}.googleapis.com/$discovery/rest?version={api_version}"
                 method_id = find_gcp_api_method(fallback_url, http_method, api_path, quiet=False)
 
-            # Deduplicate based on method_id for successful matches
-            # For failed matches (method_id is None), deduplicate based on the full path to avoid repeating the same failed path
+            # Deduplicate the printed output based on method_id for successful matches (and on the
+            # full path for failed matches). Permissions are still evaluated for *every* call, because
+            # a repeated method may carry a payload that pulls in extra conditional permissions (e.g. a
+            # second VM that uses a CMEK key or a custom service account).
             if method_id:
                 sig = (method_id, http_method)
+                base_permissions = get_iam_permission(method_id)
+                cond_permissions = evaluate_conditional_permissions(method_id, request_body)
+                all_permissions = sorted(set(base_permissions + cond_permissions))
+                new_permissions = set(all_permissions) - total_permissions
+                total_permissions.update(all_permissions)
+                if sig in printed_signatures and not new_permissions:
+                    continue
             else:
                 sig = (full_path, http_method)
-
-            if sig in printed_signatures:
-                continue
+                if sig in printed_signatures:
+                    continue
             printed_signatures.add(sig)
 
             sep = "-" * 50
@@ -399,19 +443,12 @@ def process_terraform_log(log_file_path):
                 print(msg_mapped)
                 report_lines.append(msg_mapped + "\n")
                 
-                base_permissions = get_iam_permission(method_id)
-                cond_permissions = evaluate_conditional_permissions(method_id, request_body)
-                
-                # Merge and deduplicate
-                all_permissions = list(set(base_permissions + cond_permissions))
-                total_permissions.update(all_permissions)
-                
                 msg_iam = f"✅ Required IAM:      {all_permissions}"
                 print(msg_iam)
                 report_lines.append(msg_iam + "\n")
                 
                 if cond_permissions:
-                    msg_cond = f"   (Included conditional IAM: {cond_permissions})"
+                    msg_cond = f"   (Included conditional IAM: {sorted(cond_permissions)})"
                     print(msg_cond)
                     report_lines.append(msg_cond + "\n")
             else:
